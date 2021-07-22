@@ -6,3 +6,8 @@ This repo provides a notebook to reproduce the findings, and a draft paper. Enjo
 
 If you appreciate it, please consider following [microprediction](https://www.linkedin.com/company/65109690) on Linked-In to help justify my existence. 
 
+![](https://i.imgur.com/bJ7C6gY.jpg)
+
+Photo by <a href="https://unsplash.com/@mkaine17?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Fredrick Lee</a> on <a href="https://unsplash.com/s/photos/nfl?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+
