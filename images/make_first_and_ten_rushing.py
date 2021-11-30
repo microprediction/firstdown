@@ -8,7 +8,7 @@ font = {'family' : 'normal',
 import matplotlib
 matplotlib.rc('font', **font)
 
-dpi = 1200
+dpi = 300
 
 gains_on_first = df.loc[(df['dwn']==1)& (df['ytg']==10) & (df['type']=='RUSH') & (df['yds']<15) & (df['yds']>5),:]
 gains_on_first[['yds']].rename(columns={'yds':'First Down Yards Gained'}).hist(bins=50)
