@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 font = {'family' : 'normal',
         'weight' : 'normal',
-        'size'   : 18}
+        'size'   : 14}
 import matplotlib
 matplotlib.rc('font', **font)
 
@@ -16,8 +16,8 @@ import matplotlib.pyplot as plt
 
 circle = plt.Circle((0.5, 0.5), 0.2, color='yellow')
 
-plt.ylabel('Count',fontsize=16)
-plt.xlabel('Yards on first down',fontsize=16)
+plt.ylabel('Count',fontsize=12)
+plt.xlabel('Yards on first down',fontsize=12)
 plt.title('First and ten rushing',fontsize=20)
 plt.savefig('first_and_ten_rushing_'+str(dpi)+'.png', dpi=dpi)
 
