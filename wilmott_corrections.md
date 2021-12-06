@@ -1,5 +1,53 @@
 
-Minor fixes
+
+
+
+
+
+
+
+### ENDNOTES 
+
+5. Turnovers are increasingly rare in NFL games and
+averaged per game.
+
+should read
+
+Turnovers are increasingly rare in NFL games and
+average 2.6 per game.
+
+
+### REFERENCES
+
+NFL Markov. Edited by GitHub repository htt
+
+should read.. 
+
+NFL Markov Model. Forked to repository htt
+
+### Page 49, middle column second to last para
+
+(Cotton,2021]
+
+should read 
+
+(Cotton, 2001)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------
+(previously communicated)
 
 
 ### years -> yards 
