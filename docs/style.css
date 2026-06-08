@@ -254,6 +254,17 @@ input[type="range"]::-moz-range-thumb {
   background: var(--marker); color: #1a1300; border-color: var(--marker);
 }
 
+/* figure source captions */
+.viz-caption {
+  font-size: .82rem;
+  color: var(--ink-faint);
+  margin: .9rem 0 0;
+  line-height: 1.5;
+}
+.viz-caption a { color: var(--accent-2); text-decoration: none; }
+.viz-caption a:hover { text-decoration: underline; }
+.viz-caption code { font-family: "JetBrains Mono", monospace; font-size: .9em; color: var(--ink-dim); }
+
 /* svg text defaults */
 svg text { font-family: "Inter", sans-serif; }
 .axis-label { fill: var(--ink-faint); font-size: 20px; }

@@ -221,8 +221,13 @@
 
     const note = document.createElement("div");
     note.className = "verdict neutral";
-    note.innerHTML = `The frequency of plays gaining <strong>exactly ${line}</strong> yards falls below its neighbours: ball-carriers tend to stop advancing once the line to gain is reached, truncating the distribution at the marker.`;
+    note.innerHTML = `Plays gaining <strong>exactly ${line}</strong> yards (383) are far rarer than gains of 9 (1,058) or 11 (634) — a local minimum exactly at the line to gain.`;
     root.appendChild(note);
+
+    const cap = document.createElement("p");
+    cap.className = "viz-caption";
+    cap.innerHTML = `Source: first-and-ten rushes (dwn = 1, ytg = 10, type = RUSH), <code>pbp_nfldb_2009_2013.csv</code> from <a href="${FD.links.dataFile}" target="_blank" rel="noopener">microprediction/nflMarkov</a> (NFL play-by-play, 2009–2013; n = 33,951).`;
+    root.appendChild(cap);
   }
 
   /* =====================================================================
@@ -568,7 +573,7 @@
     const map = {
       "link-paper": FD.links.paper, "link-notebook": FD.links.notebook,
       "link-colab": FD.links.colab, "link-blog": FD.links.blog,
-      "link-linkedin": FD.links.linkedin,
+      "link-linkedin": FD.links.linkedin, "link-data": FD.links.data,
     };
     Object.entries(map).forEach(([id, href]) => {
       const el = document.getElementById(id);

@@ -60,13 +60,16 @@
       <span class="act__tag">Figure 2</span>
       <h2>The distribution of yards gained on first down</h2>
       <p>
-        Observed first-and-ten rushing outcomes show a local deficit in plays gaining
-        exactly the yardage needed for the first down. Ball-carriers tend to stop
-        advancing once the line to gain is reached, which truncates the distribution at
-        that point — behaviour consistent with treating the marker as a terminal
-        objective.
+        Across 33,951 first-and-ten rushes (2009–2013), the number gaining exactly the
+        ten yards needed for the first down (383) falls well below both neighbours —
+        1,058 at nine yards and 634 at eleven. This pronounced local minimum, present in
+        the raw integer-yard counts rather than any binning, is consistent with the
+        marker acting as a behavioural target.
       </p>
-      <p class="hint">The highlighted bar sits on the line to gain.</p>
+      <p class="hint">
+        The highlighted bar sits exactly on the line to gain. Data:
+        <a href="https://github.com/microprediction/nflMarkov" target="_blank" rel="noopener">microprediction/nflMarkov</a>.
+      </p>
     </div>
     <div class="act__viz reveal">
       <div id="notch-demo" class="viz-card"></div>
@@ -145,13 +148,17 @@
       <a id="link-paper" href="#">Paper (PDF)</a>
       <a id="link-notebook" href="#">Notebook</a>
       <a id="link-colab" href="#">Open in Colab</a>
+      <a id="link-data" href="#">Data (nflMarkov)</a>
       <a id="link-blog" href="#">Discussion</a>
       <a id="link-linkedin" href="#">microprediction</a>
     </div>
     <p class="footer__note">
-      Figures are generated from the analysis in <code>Stop_shy_of_the_first_down.ipynb</code>.
-      Parameters are defined in <code>data.js</code>; values are approximate and the
-      qualitative conclusions are insensitive to reasonable variation.
+      Figure 2 uses NFL play-by-play (2009–2013) from
+      <a href="https://github.com/microprediction/nflMarkov" target="_blank" rel="noopener">microprediction/nflMarkov</a>
+      (<code>inputData/pbp_nfldb_2009_2013.csv</code>). The remaining figures are generated
+      from the analysis in <code>Stop_shy_of_the_first_down.ipynb</code>; their parameters
+      are defined in <code>data.js</code> and are approximate, with the qualitative
+      conclusions insensitive to reasonable variation.
     </p>
   </footer>
 

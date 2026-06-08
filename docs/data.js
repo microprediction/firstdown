@@ -49,28 +49,31 @@ const FD = {
   },
 
   /*
-   * The Notch.
-   * Distribution of yards gained on FIRST-AND-TEN rushing plays, as seen in
-   * images/first_and_ten_rushing_1200.png. The line to gain is 10 yards.
-   * Note the dip right at the marker: ball-carriers treat the first-down line
-   * as a finish line and stop the instant they cross it, so the bin just past
-   * the line is suppressed. Counts are read approximately from the chart.
+   * The Notch — REAL counts (not estimated).
+   * Distribution of yards gained on first-and-ten rushing plays, computed from
+   * the play-by-play used by the paper:
+   *   pbp_nfldb_2009_2013.csv  (microprediction/nflMarkov, seasons 2009-2013),
+   *   filtered to dwn==1, ytg==10, type=="RUSH".
+   * Exact integer-yard counts (n = 33,951 such rushes overall). The window
+   * shown (6-15 yds) matches the paper's chart, which excludes yds<=5.
+   * Note the pronounced local minimum at exactly 10 — the line to gain: gains of
+   * 9 yds (1058) and 11 yds (634) are far more common than gains of exactly
+   * 10 yds (383). The dip is present in the raw integer data, not an artifact of
+   * histogram binning.
    */
   notch: {
     lineToGain: 10,
     bins: [
-      { yards: 4, count: 2050 },
-      { yards: 5, count: 2380 },
-      { yards: 6, count: 1820 },
+      { yards: 6, count: 1824 },
       { yards: 7, count: 1390 },
       { yards: 8, count: 1010 },
-      { yards: 9, count: 1060 },
-      { yards: 10, count: 380 },  // <-- the notch, right at the marker
-      { yards: 11, count: 640 },
-      { yards: 12, count: 440 },
-      { yards: 13, count: 380 },
-      { yards: 14, count: 290 },
-      { yards: 15, count: 210 },
+      { yards: 9, count: 1058 },
+      { yards: 10, count: 383 },  // <-- local minimum, exactly at the marker
+      { yards: 11, count: 634 },
+      { yards: 12, count: 444 },
+      { yards: 13, count: 384 },
+      { yards: 14, count: 291 },
+      { yards: 15, count: 222 },
     ],
   },
 
@@ -82,6 +85,8 @@ const FD = {
     colab: "https://colab.research.google.com/github/microprediction/firstdown/blob/main/Stop_shy_of_the_first_down.ipynb",
     blog: "https://www.microprediction.com/blog/nine",
     linkedin: "https://www.linkedin.com/company/65109690",
+    data: "https://github.com/microprediction/nflMarkov",
+    dataFile: "https://github.com/microprediction/nflMarkov/blob/master/inputData/pbp_nfldb_2009_2013.csv",
   },
 };
 

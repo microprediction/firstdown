@@ -16,8 +16,14 @@ each a live JavaScript demo you can drag and tune:
 - `index.html` — page structure / copy
 - `style.css` — dark editorial theme
 - `app.js` — the five D3-powered demos
-- `data.js` — **all** the constants (drawn from `../Stop_shy_of_the_first_down.ipynb`).
-  Every claim reads from here, so you can stress-test the argument by editing one file.
+- `data.js` — **all** the constants. Every claim reads from here, so you can
+  stress-test the argument by editing one file. Figure 2's distribution holds the
+  **exact** integer-yard counts of first-and-ten rushes (dwn = 1, ytg = 10, type =
+  RUSH; n = 33,951) computed from
+  [`microprediction/nflMarkov`](https://github.com/microprediction/nflMarkov)'s
+  `inputData/pbp_nfldb_2009_2013.csv` (NFL play-by-play, 2009–2013). The expected-points
+  curve and conversion rates are approximate, calibrated to
+  `../Stop_shy_of_the_first_down.ipynb`.
 
 ## Run locally
 ```bash
