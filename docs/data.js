@@ -48,6 +48,16 @@ const FD = {
     rush: { meanYards: 4.2 },
   },
 
+  // ---- The implied value of possession (the central argument) ----
+  // Plausible worth of one possession, expressed in yards of field position.
+  // The paper uses ~40 yards (≈ 2 points); a generous range is shown as a band.
+  possession: {
+    plausibleLo: 25,
+    plausibleHi: 50,
+    typical: 40,
+    avgYardsWhenConvert: 4.9, // blend of 4.7 (2nd-and-1) and 5.0 (3rd-and-1)
+  },
+
   /*
    * The Notch — REAL counts (not estimated).
    * Distribution of yards gained on first-and-ten rushing plays, computed from
@@ -138,6 +148,25 @@ FD.driveValueByGain = function (gain, los, marker) {
   const g3 = Math.max(d, FD.thirdAndOne.rush.yardsWhenConvert);
   const v3 = p3 * FD.expectedPoints(yl + g3) + (1 - p3) * FD.puntValue(yl);
   return p2 * FD.expectedPoints(yl + g2) + (1 - p2) * v3;
+};
+
+/* THE central calculation.
+ * If you are downed a yard short (2nd-and-1) and rush it out, you convert with
+ * probability P(convert) and otherwise lose the ball (punt) with probability
+ * P(lose). Converting advances you, on average, g yards — i.e. (g - 1) yards
+ * beyond where reaching the marker would have left you.
+ * Reaching for the first down is therefore worthwhile ONLY IF a possession is
+ * worth more than this many yards of field position:
+ *     breakeven = [P(convert) / P(lose)] * (g - 1)
+ * With p2 = 0.80, p3 = 0.72, g = 4.9 this is ≈ 66 yards (the paper's 66.3). */
+FD.impliedBreakeven = function (p2, p3, g) {
+  p2 = p2 == null ? FD.secondAndOne.rush.convert : p2;
+  p3 = p3 == null ? FD.thirdAndOne.rush.convert : p3;
+  g = g == null ? FD.possession.avgYardsWhenConvert : g;
+  const pConvert = p2 + (1 - p2) * p3;      // convert on 2nd, else on 3rd
+  const pLose = (1 - p2) * (1 - p3);        // fail both -> punt on 4th
+  if (pLose <= 0) return Infinity;
+  return (pConvert / pLose) * (g - 1);
 };
 
 /* Net value (to us) of failing to convert and then PUNTING from yardline yl.

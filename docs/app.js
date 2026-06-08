@@ -301,6 +301,122 @@
   }
 
   /* =====================================================================
+     THE IMPLIED VALUE OF POSSESSION — the central argument.
+     What would a possession have to be worth (in yards) to justify reaching
+     for the first down rather than stopping a yard short and rushing it out?
+     ===================================================================== */
+  function initImpliedDemo() {
+    const root = document.getElementById("implied-demo");
+    if (!root) return;
+
+    const params = {
+      p2: FD.secondAndOne.rush.convert,
+      p3: FD.thirdAndOne.rush.convert,
+      g: FD.possession.avgYardsWhenConvert,
+    };
+    let estimate = FD.possession.typical; // the user's value of a possession (yards)
+
+    const ctrls = document.createElement("div");
+    ctrls.className = "controls";
+    ctrls.innerHTML = `
+      <div class="control"><label>2nd-and-1 conversion rate <span id="i-p2">${Math.round(params.p2*100)}%</span></label>
+        <input type="range" id="i-r2" min="0.5" max="0.95" step="0.01" value="${params.p2}"></div>
+      <div class="control"><label>3rd-and-1 conversion rate <span id="i-p3">${Math.round(params.p3*100)}%</span></label>
+        <input type="range" id="i-r3" min="0.5" max="0.95" step="0.01" value="${params.p3}"></div>
+      <div class="control"><label>Average yards gained when converting <span id="i-pg">${params.g.toFixed(1)}</span></label>
+        <input type="range" id="i-rg" min="2" max="8" step="0.1" value="${params.g}"></div>`;
+    root.appendChild(ctrls);
+
+    const W = 1000, H = 320, m = { l: 60, r: 40 };
+    const svg = makeSVG(root, W, H);
+    const x = d3.scaleLinear().domain([0, 100]).range([m.l, W - m.r]).clamp(true);
+    const axisY = 200, barTop = 64;
+
+    // zone rectangles (repainted on update)
+    const zoneStop = svg.append("rect").attr("x", m.l).attr("y", barTop).attr("height", axisY - barTop).attr("fill", "rgba(87,224,138,.12)");
+    const zoneReach = svg.append("rect").attr("y", barTop).attr("height", axisY - barTop).attr("fill", "rgba(255,107,107,.10)");
+    const zoneStopLbl = svg.append("text").attr("y", barTop + 28).attr("text-anchor", "middle").attr("fill", "#57e08a").attr("font-size", 20).attr("font-weight", 600).text("stop a yard short");
+    const zoneReachLbl = svg.append("text").attr("y", barTop + 28).attr("text-anchor", "middle").attr("fill", "#ff6b6b").attr("font-size", 20).attr("font-weight", 600).text("reaching pays");
+
+    // plausible band
+    const band = FD.possession;
+    svg.append("rect").attr("x", x(band.plausibleLo)).attr("width", x(band.plausibleHi) - x(band.plausibleLo))
+      .attr("y", axisY - 22).attr("height", 44).attr("rx", 6)
+      .attr("fill", "rgba(70,195,255,.18)").attr("stroke", "#46c3ff").attr("stroke-width", 1.5);
+    svg.append("text").attr("x", x((band.plausibleLo + band.plausibleHi) / 2)).attr("y", axisY + 58)
+      .attr("text-anchor", "middle").attr("fill", "#46c3ff").attr("font-size", 19).attr("font-weight", 600)
+      .text("plausible value of a possession");
+
+    // axis
+    svg.append("g").attr("transform", `translate(0,${axisY})`)
+      .call(d3.axisBottom(x).tickValues([0, 20, 40, 60, 80, 100]).tickFormat((d) => d + " yds"))
+      .call((g) => g.selectAll("text").attr("fill", "#9fb0a4").attr("font-size", 19))
+      .call((g) => g.selectAll("line,path").attr("stroke", "rgba(255,255,255,.2)"));
+
+    // breakeven line + label (repainted)
+    const beLine = svg.append("line").attr("y1", barTop - 6).attr("y2", axisY + 8).attr("stroke", "#ffd23f").attr("stroke-width", 3);
+    const beLbl = svg.append("text").attr("y", barTop - 14).attr("text-anchor", "middle").attr("fill", "#ffd23f").attr("font-size", 20).attr("font-weight", 700);
+
+    // draggable estimate marker (handle below the axis so it never collides
+    // with the plausible-band label above it)
+    const estG = svg.append("g").style("cursor", "grab");
+    estG.append("path").attr("d", "M0,0 L-11,-22 L11,-22 Z").attr("fill", "#fff").attr("stroke", "#0a0e0c").attr("stroke-width", 1.5);
+    estG.append("text").attr("text-anchor", "middle").attr("y", -30).attr("fill", "#fff").attr("font-size", 18).attr("font-weight", 600).text("your estimate ▾");
+
+    const stats = document.createElement("div");
+    stats.className = "stat-row";
+    stats.innerHTML = `
+      <div class="stat"><div class="stat__label">Break-even (must exceed)</div><div class="stat__value warn" id="i-be">—</div></div>
+      <div class="stat"><div class="stat__label">Your estimate</div><div class="stat__value" id="i-est">—</div></div>
+      <div class="stat"><div class="stat__label">Verdict</div><div class="stat__value" id="i-ver">—</div></div>`;
+    root.appendChild(stats);
+    const verdict = document.createElement("div");
+    verdict.className = "verdict"; verdict.id = "i-verdict";
+    root.appendChild(verdict);
+
+    function update() {
+      const be = FD.impliedBreakeven(params.p2, params.p3, params.g);
+      const beClamped = Math.max(0, Math.min(100, be));
+      zoneStop.attr("width", Math.max(0, x(beClamped) - m.l));
+      zoneReach.attr("x", x(beClamped)).attr("width", Math.max(0, (W - m.r) - x(beClamped)));
+      zoneStopLbl.attr("x", (m.l + x(beClamped)) / 2).attr("opacity", x(beClamped) - m.l > 120 ? 1 : 0);
+      zoneReachLbl.attr("x", (x(beClamped) + (W - m.r)) / 2).attr("opacity", (W - m.r) - x(beClamped) > 110 ? 1 : 0);
+      beLine.attr("x1", x(beClamped)).attr("x2", x(beClamped));
+      beLbl.attr("x", x(beClamped)).text(`break-even ≈ ${be > 100 ? "100+" : Math.round(be)} yds`);
+      estG.attr("transform", `translate(${x(estimate)},${axisY})`);
+
+      document.getElementById("i-be").textContent = (be > 200 ? "200+" : Math.round(be)) + " yds";
+      document.getElementById("i-est").textContent = Math.round(estimate) + " yds";
+      const reach = estimate >= be;
+      const ver = document.getElementById("i-ver");
+      ver.textContent = reach ? "Reach for it" : "Stop shy";
+      ver.className = "stat__value " + (reach ? "bad" : "good");
+
+      const v = document.getElementById("i-verdict");
+      if (reach) {
+        v.className = "verdict bad";
+        v.innerHTML = `At ${Math.round(estimate)} yards a possession clears the ${Math.round(be)}-yard break-even, so under these assumptions reaching for the first down is justified. Note how high a valuation that requires.`;
+      } else {
+        v.className = "verdict";
+        v.innerHTML = `A possession would have to be worth <strong>${Math.round(be)} yards</strong> to justify reaching for the first down. Your estimate (${Math.round(estimate)} yds) — and any plausible value — falls well short, so the ball-carrier should <strong>stop a yard short</strong>.`;
+      }
+    }
+
+    estG.call(d3.drag()
+      .on("start", () => estG.style("cursor", "grabbing"))
+      .on("drag", (e) => { estimate = Math.round(x.invert(e.x)); update(); })
+      .on("end", () => estG.style("cursor", "grab")));
+
+    const bind = (id, key, span, f) => document.getElementById(id).addEventListener("input", (e) => {
+      params[key] = +e.target.value; document.getElementById(span).textContent = f(params[key]); update();
+    });
+    bind("i-r2", "p2", "i-p2", (v) => Math.round(v * 100) + "%");
+    bind("i-r3", "p3", "i-p3", (v) => Math.round(v * 100) + "%");
+    bind("i-rg", "g", "i-pg", (v) => v.toFixed(1));
+    update();
+  }
+
+  /* =====================================================================
      ACT 4 — Monte Carlo: 2nd-and-1 vs 1st-and-10.
      Both reduce to "expected points once you reach a fresh 1st-and-10",
      plus the short-yardage gamble's turnover risk for the 2nd-and-1 path.
@@ -593,9 +709,10 @@
     wireLinks();
     wireReveal();
     initFieldDemo();
-    initNotchDemo();
     initEPCurve();
+    initImpliedDemo();
     initSimDemo();
     initTreeDemo();
+    initNotchDemo();
   });
 })();

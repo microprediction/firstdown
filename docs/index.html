@@ -54,10 +54,95 @@
     </div>
   </section>
 
-  <!-- ============================ ACT 2 ============================ -->
-  <section class="act" id="act2">
+  <!-- ===================== Field position in EP ===================== -->
+  <section class="act" id="act-ep">
     <div class="act__text reveal">
-      <span class="act__tag">Figure 2 · An aside</span>
+      <span class="act__tag">Figure 2</span>
+      <h2>Field position in expected points</h2>
+      <p>
+        The common unit for the analysis is the expected points of a possession as a
+        function of field position: approximately zero near one's own twenty, rising to
+        about four near the opponent's. As a rough guide, fifteen yards correspond to one
+        point — and, equivalently, a possession is worth on the order of forty yards of
+        field position. That exchange rate is what the next figure puts to work.
+      </p>
+      <p class="hint">Drag along the curve to read off the value at any field position.</p>
+    </div>
+    <div class="act__viz reveal">
+      <div id="ep-demo" class="viz-card"></div>
+    </div>
+  </section>
+
+  <!-- ================= The implied value of possession ================= -->
+  <section class="act" id="act-implied">
+    <div class="act__text reveal">
+      <span class="act__tag">Figure 3 · The central point</span>
+      <h2>What would a possession have to be worth?</h2>
+      <p>
+        Rather than assume a value for a possession, invert the question. If a
+        ball-carrier is downed a yard short (2nd-and-1) and rushes it out, the chains are
+        advanced with probability ≈ 0.94, and the ball is lost only ≈ 0.06 of the time;
+        when converted, the play gains about five yards. Reaching for the first down
+        instead avoids that small risk but forgoes those extra yards.
+      </p>
+      <p>
+        Setting the two equal gives the <em>implied</em> value of a possession at which
+        reaching for the first down would just break even:
+        <code>P(convert)/P(lose) × (avg yards − 1) ≈ 66 yards</code>. A possession would
+        have to be worth roughly sixty-six yards — far beyond any plausible value — for
+        the stretch to make sense.
+      </p>
+      <p class="hint">
+        Drag your own estimate of a possession's value along the line; vary the
+        conversion rates to move the break-even threshold.
+      </p>
+    </div>
+    <div class="act__viz reveal">
+      <div id="implied-demo" class="viz-card"></div>
+    </div>
+  </section>
+
+  <!-- =============== 2nd-and-1 vs 1st-and-10 simulation =============== -->
+  <section class="act" id="act-sim">
+    <div class="act__text reveal">
+      <span class="act__tag">Figure 4</span>
+      <h2>Comparing 2nd-and-1 with 1st-and-10</h2>
+      <p>
+        The same comparison, simulated directly in expected points. From one point on the
+        field: take the first down (1st-and-10), or be downed a yard short (2nd-and-1) and
+        advance the chains. Simulating the continuation many times yields the mean
+        expected points of each; the conversion probabilities and field position can be
+        varied.
+      </p>
+      <p class="hint">Run the simulation, then adjust the parameters and re-run.</p>
+    </div>
+    <div class="act__viz reveal">
+      <div id="sim-demo" class="viz-card"></div>
+    </div>
+  </section>
+
+  <!-- ===================== 3rd-and-1 run vs pass ===================== -->
+  <section class="act" id="act-tree">
+    <div class="act__text reveal">
+      <span class="act__tag">Figure 5</span>
+      <h2>Run versus pass on 3rd-and-1</h2>
+      <p>
+        A related question: on third-and-one, the run converts more often, but the pass
+        gains substantially more when it succeeds. The decision tree below evaluates each
+        call in expected points, accounting for a punt on a failed conversion. The
+        preferred call depends on field position.
+      </p>
+      <p class="hint">Switch the call and vary the field position to compare.</p>
+    </div>
+    <div class="act__viz reveal">
+      <div id="tree-demo" class="viz-card"></div>
+    </div>
+  </section>
+
+  <!-- ===================== Distribution (aside) ===================== -->
+  <section class="act" id="act-notch">
+    <div class="act__text reveal">
+      <span class="act__tag">Figure 6 · An aside</span>
       <h2>The distribution of yards gained on first down</h2>
       <p>
         A curiosity, offered for interest rather than as evidence for the argument.
@@ -77,68 +162,14 @@
     </div>
   </section>
 
-  <!-- ============================ ACT 3 ============================ -->
-  <section class="act" id="act3">
-    <div class="act__text reveal">
-      <span class="act__tag">Figure 3</span>
-      <h2>Field position in expected points</h2>
-      <p>
-        The common unit for the analysis is the expected points of a possession as a
-        function of field position: approximately zero near one's own twenty, rising to
-        about four near the opponent's. As a rough guide, fifteen yards correspond to
-        one point and a possession to roughly forty yards of field position.
-      </p>
-      <p class="hint">Drag along the curve to read off the value at any field position.</p>
-    </div>
-    <div class="act__viz reveal">
-      <div id="ep-demo" class="viz-card"></div>
-    </div>
-  </section>
-
-  <!-- ============================ ACT 4 ============================ -->
-  <section class="act" id="act4">
-    <div class="act__text reveal">
-      <span class="act__tag">Figure 4</span>
-      <h2>Comparing 2nd-and-1 with 1st-and-10</h2>
-      <p>
-        The two states are compared from the same point on the field: taking the first
-        down (1st-and-10), or being downed a yard short (2nd-and-1) and advancing the
-        chains on the following downs. Simulating the continuation many times yields the
-        mean expected points of each. The conversion probabilities and field position
-        can be varied.
-      </p>
-      <p class="hint">Run the simulation, then adjust the parameters and re-run.</p>
-    </div>
-    <div class="act__viz reveal">
-      <div id="sim-demo" class="viz-card"></div>
-    </div>
-  </section>
-
-  <!-- ============================ ACT 5 ============================ -->
-  <section class="act" id="act5">
-    <div class="act__text reveal">
-      <span class="act__tag">Figure 5</span>
-      <h2>Run versus pass on 3rd-and-1</h2>
-      <p>
-        A related question: on third-and-one, the run converts more often, but the pass
-        gains substantially more when it succeeds. The decision tree below evaluates each
-        call in expected points, accounting for a punt on a failed conversion. The
-        preferred call depends on field position.
-      </p>
-      <p class="hint">Switch the call and vary the field position to compare.</p>
-    </div>
-    <div class="act__viz reveal">
-      <div id="tree-demo" class="viz-card"></div>
-    </div>
-  </section>
-
   <!-- ============================ CLOSE ============================ -->
   <section class="close reveal">
     <h2>Summary</h2>
     <p>
       Under an expected-points objective, the first-down marker is an accounting
-      threshold rather than a goal. Because a short-yardage conversion is highly likely
-      and tends to advance the ball further, being downed a yard short can carry greater
+      threshold rather than a goal. For reaching it to be worthwhile, a possession would
+      have to be valued at roughly sixty-six yards of field position; no plausible
+      valuation comes close. Being downed a yard short can therefore carry greater
       expected value than reaching the marker. The full derivation and data are in the
       paper and accompanying notebook.
     </p>
@@ -154,7 +185,7 @@
       <a id="link-linkedin" href="#">microprediction</a>
     </div>
     <p class="footer__note">
-      Figure 2 uses NFL play-by-play (2009–2013) from
+      Figure 6 uses NFL play-by-play (2009–2013) from
       <a href="https://github.com/microprediction/nflMarkov" target="_blank" rel="noopener">microprediction/nflMarkov</a>
       (<code>inputData/pbp_nfldb_2009_2013.csv</code>). The remaining figures are generated
       from the analysis in <code>Stop_shy_of_the_first_down.ipynb</code>; their parameters
