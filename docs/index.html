@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stop Shy of the First Down — why first-down strategy needs a fix</title>
+  <title>Stop Shy of the First Down — an expected-points analysis</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%88%3C/text%3E%3C/svg%3E" />
-  <meta name="description" content="An interactive case for why NFL ball-carriers should stop shy of the first-down marker. Drag, simulate, and see the math for yourself." />
+  <meta name="description" content="An expected-points analysis of first-down strategy in American football, with interactive figures." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
@@ -18,29 +18,36 @@
   <header class="hero">
     <div class="hero__field" aria-hidden="true"></div>
     <div class="hero__inner">
-      <p class="eyebrow">An interactive proof · Sports analytics</p>
-      <h1>The line is not<br />the finish line.</h1>
+      <p class="eyebrow">An expected-points analysis · Interactive figures</p>
+      <h1>Stop Shy of the<br />First Down</h1>
       <p class="lede">
-        For a hundred years, football has treated the first-down marker as a place to
-        <em>reach</em>. The data says otherwise: on first down, a ball-carrier who can
-        only just stretch to the marker is often better off going down <strong>a yard
-        short</strong>. Scroll, drag, and run the numbers yourself.
+        Conventional play treats the first-down marker as a target to be reached
+        whenever possible. Measured in expected points, that objective is not always
+        optimal: on first down, a ball-carrier able only to reach the marker can be
+        better off being downed a yard short. The figures below let you examine the
+        argument directly.
       </p>
-      <a class="cta" href="#act1">See why ↓</a>
+      <a class="cta" href="#act1">Begin →</a>
     </div>
   </header>
 
   <!-- ============================ ACT 1 ============================ -->
   <section class="act" id="act1">
     <div class="act__text reveal">
-      <span class="act__tag">Act 1 — The hook</span>
-      <h2>Where would you go down?</h2>
+      <span class="act__tag">Figure 1</span>
+      <h2>Drive value versus where the carrier is downed</h2>
       <p>
-        Here's a first-down run. Drag the ball-carrier to choose where he ends the play.
-        Watch the <strong>expected points</strong> for the drive — the true scoreboard —
-        as you cross, or stop short of, the marker.
+        Consider a first-down play. The curve below plots the expected points for the
+        remainder of the drive as a function of where the ball-carrier is downed,
+        under a simple "advance the chains" continuation. It is a single, consistent
+        measure across the whole range — and it has an interior maximum located
+        <em>before</em> the line to gain.
       </p>
-      <p class="hint">Drag the ● along the field. Then ask: did crossing the line actually help?</p>
+      <p class="hint">
+        Drag the marker along the field. The corresponding point on the curve moves
+        with it; note that crossing the line to gain lowers, rather than raises, the
+        drive's expected points.
+      </p>
     </div>
     <div class="act__viz reveal">
       <div id="field-demo" class="viz-card"></div>
@@ -50,15 +57,16 @@
   <!-- ============================ ACT 2 ============================ -->
   <section class="act" id="act2">
     <div class="act__text reveal">
-      <span class="act__tag">Act 2 — The tell</span>
-      <h2>The notch in the data</h2>
+      <span class="act__tag">Figure 2</span>
+      <h2>The distribution of yards gained on first down</h2>
       <p>
-        This is what really happens on first-and-ten runs. Look at the bin sitting right
-        on the marker. Ball-carriers treat the line as a finish line — the instant they
-        cross it, they stop trying. The distribution <em>collapses</em> exactly where the
-        first down is won.
+        Observed first-and-ten rushing outcomes show a local deficit in plays gaining
+        exactly the yardage needed for the first down. Ball-carriers tend to stop
+        advancing once the line to gain is reached, which truncates the distribution at
+        that point — behaviour consistent with treating the marker as a terminal
+        objective.
       </p>
-      <p class="hint">The highlighted bar is the yard the whole league stops fighting for.</p>
+      <p class="hint">The highlighted bar sits on the line to gain.</p>
     </div>
     <div class="act__viz reveal">
       <div id="notch-demo" class="viz-card"></div>
@@ -68,15 +76,15 @@
   <!-- ============================ ACT 3 ============================ -->
   <section class="act" id="act3">
     <div class="act__text reveal">
-      <span class="act__tag">Act 3 — The currency</span>
-      <h2>Yards aren't the point. Points are.</h2>
+      <span class="act__tag">Figure 3</span>
+      <h2>Field position in expected points</h2>
       <p>
-        Everything reduces to one exchange rate: where you are on the field, in
-        <strong>expected points</strong>. Roughly zero at your own 20, about four near
-        your opponent's. So ~15 yards buys a point — and one whole possession is worth
-        about 40 yards. Drag the ball to feel the curve.
+        The common unit for the analysis is the expected points of a possession as a
+        function of field position: approximately zero near one's own twenty, rising to
+        about four near the opponent's. As a rough guide, fifteen yards correspond to
+        one point and a possession to roughly forty yards of field position.
       </p>
-      <p class="hint">A lost possession costs ≈ −2 points. Hold that number; Act 4 needs it.</p>
+      <p class="hint">Drag along the curve to read off the value at any field position.</p>
     </div>
     <div class="act__viz reveal">
       <div id="ep-demo" class="viz-card"></div>
@@ -86,15 +94,16 @@
   <!-- ============================ ACT 4 ============================ -->
   <section class="act" id="act4">
     <div class="act__text reveal">
-      <span class="act__tag">Act 4 — The showdown</span>
-      <h2>2nd-and-1 beats 1st-and-10</h2>
+      <span class="act__tag">Figure 4</span>
+      <h2>Comparing 2nd-and-1 with 1st-and-10</h2>
       <p>
-        Here's the heresy, made testable. Compare two states from the same spot: take the
-        first down now (<strong>1st-and-10</strong>), or stop a yard short
-        (<strong>2nd-and-1</strong>) and rush it out. Simulate thousands of drives and
-        watch which state scores more. Tune the assumptions — the verdict holds.
+        The two states are compared from the same point on the field: taking the first
+        down (1st-and-10), or being downed a yard short (2nd-and-1) and advancing the
+        chains on the following downs. Simulating the continuation many times yields the
+        mean expected points of each. The conversion probabilities and field position
+        can be varied.
       </p>
-      <p class="hint">Press <em>Run 10,000 drives</em>. Then move the sliders and re-run.</p>
+      <p class="hint">Run the simulation, then adjust the parameters and re-run.</p>
     </div>
     <div class="act__viz reveal">
       <div id="sim-demo" class="viz-card"></div>
@@ -104,14 +113,15 @@
   <!-- ============================ ACT 5 ============================ -->
   <section class="act" id="act5">
     <div class="act__text reveal">
-      <span class="act__tag">Act 5 — A bonus heresy</span>
-      <h2>3rd-and-1: should you pass?</h2>
+      <span class="act__tag">Figure 5</span>
+      <h2>Run versus pass on 3rd-and-1</h2>
       <p>
-        While we're upending things: on 3rd-and-1 the run is "safe," but the pass —
-        though it converts a little less often — gains far more when it lands, and the
-        defense never expects it. Net it out in expected points.
+        A related question: on third-and-one, the run converts more often, but the pass
+        gains substantially more when it succeeds. The decision tree below evaluates each
+        call in expected points, accounting for a punt on a failed conversion. The
+        preferred call depends on field position.
       </p>
-      <p class="hint">Toggle the call and compare the expected-points payoff.</p>
+      <p class="hint">Switch the call and vary the field position to compare.</p>
     </div>
     <div class="act__viz reveal">
       <div id="tree-demo" class="viz-card"></div>
@@ -120,27 +130,28 @@
 
   <!-- ============================ CLOSE ============================ -->
   <section class="close reveal">
-    <h2>So fix first down.</h2>
+    <h2>Summary</h2>
     <p>
-      The marker is an accounting line, not a goal. Coached well, a yard short can be
-      worth more than a yard past — because a near-certain conversion on the next play
-      lands you <em>further downfield with a fresh set of downs</em>. The math has been
-      sitting in plain sight.
+      Under an expected-points objective, the first-down marker is an accounting
+      threshold rather than a goal. Because a short-yardage conversion is highly likely
+      and tends to advance the ball further, being downed a yard short can carry greater
+      expected value than reaching the marker. The full derivation and data are in the
+      paper and accompanying notebook.
     </p>
   </section>
 
   <footer class="footer">
     <div class="footer__links">
-      <a id="link-paper" href="#">📄 The paper (PDF)</a>
-      <a id="link-notebook" href="#">📓 Reproduce it (notebook)</a>
-      <a id="link-colab" href="#">▶ Open in Colab</a>
-      <a id="link-blog" href="#">✍ Blog write-up</a>
-      <a id="link-linkedin" href="#">in microprediction</a>
+      <a id="link-paper" href="#">Paper (PDF)</a>
+      <a id="link-notebook" href="#">Notebook</a>
+      <a id="link-colab" href="#">Open in Colab</a>
+      <a id="link-blog" href="#">Discussion</a>
+      <a id="link-linkedin" href="#">microprediction</a>
     </div>
     <p class="footer__note">
-      Figures are drawn from <code>Stop_shy_of_the_first_down.ipynb</code>; constants live
-      in <code>data.js</code> so you can stress-test every claim. Ball-park values are the
-      author's, deliberately rough — the conclusion is robust to the wiggle.
+      Figures are generated from the analysis in <code>Stop_shy_of_the_first_down.ipynb</code>.
+      Parameters are defined in <code>data.js</code>; values are approximate and the
+      qualitative conclusions are insensitive to reasonable variation.
     </p>
   </footer>
 

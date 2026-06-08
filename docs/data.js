@@ -105,6 +105,36 @@ FD.expectedPoints = function (yardline) {
   return 0;
 };
 
+/* Probability of gaining exactly the d yards you still need on a single
+ * short-yardage rush. Calibrated so 2nd-and-1 ≈ 80% and it decays with distance. */
+FD.convByDistance = function (d) {
+  const p = 0.8 * Math.exp(-0.26 * (d - 1));
+  return Math.max(0.12, Math.min(0.85, p));
+};
+
+/* THE key function for Act 1.
+ * Expected points for the whole drive as a function of where the ball-carrier
+ * chooses to go down on a first-down play. ONE consistent metric.
+ *   - Reach the marker  -> a fresh 1st-and-10 at that spot: value = EP(spot).
+ *   - Stop short        -> 2nd-and-(short), then rush it out (2nd, then 3rd,
+ *                          else punt). value accounts for the whole sequence.
+ * Because converting short yardage is near-automatic AND lands you further
+ * downfield, this curve PEAKS a yard or two SHORT of the marker, dips as you
+ * cross into 1st-and-10, and only recovers once you're well past it. */
+FD.driveValueByGain = function (gain, los, marker) {
+  los = los == null ? 50 : los;
+  marker = marker == null ? los + 10 : marker;
+  const yl = los + gain;
+  if (yl >= marker) return FD.expectedPoints(yl); // made it: fresh 1st-and-10
+  const d = marker - yl; // yards still needed
+  const p2 = FD.convByDistance(d);
+  const g2 = Math.max(d, FD.secondAndOne.rush.yardsWhenConvert);
+  const p3 = FD.convByDistance(d) * 0.9; // defense keys on the run
+  const g3 = Math.max(d, FD.thirdAndOne.rush.yardsWhenConvert);
+  const v3 = p3 * FD.expectedPoints(yl + g3) + (1 - p3) * FD.puntValue(yl);
+  return p2 * FD.expectedPoints(yl + g2) + (1 - p2) * v3;
+};
+
 /* Net value (to us) of failing to convert and then PUNTING from yardline yl.
  * A punt nets ~40 yards; if it would sail into the end zone it's a touchback to
  * the 20. The opponent then owns the ball, so our value is the negative of THEIR
