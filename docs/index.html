@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stop Shy of the First Down — why first-down strategy needs a fix</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%88%3C/text%3E%3C/svg%3E" />
+  <meta name="description" content="An interactive case for why NFL ball-carriers should stop shy of the first-down marker. Drag, simulate, and see the math for yourself." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================ HERO ============================ -->
+  <header class="hero">
+    <div class="hero__field" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <p class="eyebrow">An interactive proof · Sports analytics</p>
+      <h1>The line is not<br />the finish line.</h1>
+      <p class="lede">
+        For a hundred years, football has treated the first-down marker as a place to
+        <em>reach</em>. The data says otherwise: on first down, a ball-carrier who can
+        only just stretch to the marker is often better off going down <strong>a yard
+        short</strong>. Scroll, drag, and run the numbers yourself.
+      </p>
+      <a class="cta" href="#act1">See why ↓</a>
+    </div>
+  </header>
+
+  <!-- ============================ ACT 1 ============================ -->
+  <section class="act" id="act1">
+    <div class="act__text reveal">
+      <span class="act__tag">Act 1 — The hook</span>
+      <h2>Where would you go down?</h2>
+      <p>
+        Here's a first-down run. Drag the ball-carrier to choose where he ends the play.
+        Watch the <strong>expected points</strong> for the drive — the true scoreboard —
+        as you cross, or stop short of, the marker.
+      </p>
+      <p class="hint">Drag the ● along the field. Then ask: did crossing the line actually help?</p>
+    </div>
+    <div class="act__viz reveal">
+      <div id="field-demo" class="viz-card"></div>
+    </div>
+  </section>
+
+  <!-- ============================ ACT 2 ============================ -->
+  <section class="act" id="act2">
+    <div class="act__text reveal">
+      <span class="act__tag">Act 2 — The tell</span>
+      <h2>The notch in the data</h2>
+      <p>
+        This is what really happens on first-and-ten runs. Look at the bin sitting right
+        on the marker. Ball-carriers treat the line as a finish line — the instant they
+        cross it, they stop trying. The distribution <em>collapses</em> exactly where the
+        first down is won.
+      </p>
+      <p class="hint">The highlighted bar is the yard the whole league stops fighting for.</p>
+    </div>
+    <div class="act__viz reveal">
+      <div id="notch-demo" class="viz-card"></div>
+    </div>
+  </section>
+
+  <!-- ============================ ACT 3 ============================ -->
+  <section class="act" id="act3">
+    <div class="act__text reveal">
+      <span class="act__tag">Act 3 — The currency</span>
+      <h2>Yards aren't the point. Points are.</h2>
+      <p>
+        Everything reduces to one exchange rate: where you are on the field, in
+        <strong>expected points</strong>. Roughly zero at your own 20, about four near
+        your opponent's. So ~15 yards buys a point — and one whole possession is worth
+        about 40 yards. Drag the ball to feel the curve.
+      </p>
+      <p class="hint">A lost possession costs ≈ −2 points. Hold that number; Act 4 needs it.</p>
+    </div>
+    <div class="act__viz reveal">
+      <div id="ep-demo" class="viz-card"></div>
+    </div>
+  </section>
+
+  <!-- ============================ ACT 4 ============================ -->
+  <section class="act" id="act4">
+    <div class="act__text reveal">
+      <span class="act__tag">Act 4 — The showdown</span>
+      <h2>2nd-and-1 beats 1st-and-10</h2>
+      <p>
+        Here's the heresy, made testable. Compare two states from the same spot: take the
+        first down now (<strong>1st-and-10</strong>), or stop a yard short
+        (<strong>2nd-and-1</strong>) and rush it out. Simulate thousands of drives and
+        watch which state scores more. Tune the assumptions — the verdict holds.
+      </p>
+      <p class="hint">Press <em>Run 10,000 drives</em>. Then move the sliders and re-run.</p>
+    </div>
+    <div class="act__viz reveal">
+      <div id="sim-demo" class="viz-card"></div>
+    </div>
+  </section>
+
+  <!-- ============================ ACT 5 ============================ -->
+  <section class="act" id="act5">
+    <div class="act__text reveal">
+      <span class="act__tag">Act 5 — A bonus heresy</span>
+      <h2>3rd-and-1: should you pass?</h2>
+      <p>
+        While we're upending things: on 3rd-and-1 the run is "safe," but the pass —
+        though it converts a little less often — gains far more when it lands, and the
+        defense never expects it. Net it out in expected points.
+      </p>
+      <p class="hint">Toggle the call and compare the expected-points payoff.</p>
+    </div>
+    <div class="act__viz reveal">
+      <div id="tree-demo" class="viz-card"></div>
+    </div>
+  </section>
+
+  <!-- ============================ CLOSE ============================ -->
+  <section class="close reveal">
+    <h2>So fix first down.</h2>
+    <p>
+      The marker is an accounting line, not a goal. Coached well, a yard short can be
+      worth more than a yard past — because a near-certain conversion on the next play
+      lands you <em>further downfield with a fresh set of downs</em>. The math has been
+      sitting in plain sight.
+    </p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__links">
+      <a id="link-paper" href="#">📄 The paper (PDF)</a>
+      <a id="link-notebook" href="#">📓 Reproduce it (notebook)</a>
+      <a id="link-colab" href="#">▶ Open in Colab</a>
+      <a id="link-blog" href="#">✍ Blog write-up</a>
+      <a id="link-linkedin" href="#">in microprediction</a>
+    </div>
+    <p class="footer__note">
+      Figures are drawn from <code>Stop_shy_of_the_first_down.ipynb</code>; constants live
+      in <code>data.js</code> so you can stress-test every claim. Ball-park values are the
+      author's, deliberately rough — the conclusion is robust to the wiggle.
+    </p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
