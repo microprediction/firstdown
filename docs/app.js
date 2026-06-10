@@ -226,7 +226,7 @@
 
     const cap = document.createElement("p");
     cap.className = "viz-caption";
-    cap.innerHTML = `Source: first-and-ten rushes (dwn = 1, ytg = 10, type = RUSH), <code>pbp_nfldb_2009_2013.csv</code> from <a href="${FD.links.dataFile}" target="_blank" rel="noopener">microprediction/nflMarkov</a> (NFL play-by-play 2009–2013, compiled by Dilday 2016; n = 33,951).`;
+    cap.innerHTML = `Source: first-and-ten rushes (dwn = 1, ytg = 10, type = RUSH), <code>pbp_nfldb_2009_2013.csv</code> — Ben Dilday's <a href="${FD.links.dilday}" target="_blank" rel="noopener">nflMarkov</a> via the <a href="${FD.links.dataFile}" target="_blank" rel="noopener">microprediction fork</a> (NFL play-by-play 2009–2013; n = 33,951).`;
     root.appendChild(cap);
   }
 

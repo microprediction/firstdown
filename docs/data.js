@@ -102,6 +102,7 @@ const FD = {
     linkedin: "https://www.linkedin.com/company/65109690",
     data: "https://github.com/microprediction/nflMarkov",
     dataFile: "https://github.com/microprediction/nflMarkov/blob/master/inputData/pbp_nfldb_2009_2013.csv",
+    dilday: "https://github.com/bdilday/nflMarkov", // Ben Dilday's original repo (the "Dilday 2016" source)
   },
 };
 

@@ -38,9 +38,11 @@ This work appears as a book chapter and a magazine article:
 
 ## Data
 
-NFL play-by-play for the 2009–2013 seasons, compiled by Dilday (2016) and packaged in
-[microprediction/nflMarkov](https://github.com/microprediction/nflMarkov)
-(`inputData/pbp_nfldb_2009_2013.csv`).
+NFL play-by-play for the 2009–2013 seasons from Ben Dilday's
+[nflMarkov](https://github.com/bdilday/nflMarkov) — used here via the
+[microprediction fork](https://github.com/microprediction/nflMarkov)
+(`inputData/pbp_nfldb_2009_2013.csv`), which is built on the
+[nfldb](https://github.com/BurntSushi/nfldb) project.
 
 ## More
 
