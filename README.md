@@ -37,10 +37,16 @@ NFL play-by-play for the 2009–2013 seasons, compiled by Dilday (2016) and pack
 [microprediction/nflMarkov](https://github.com/microprediction/nflMarkov)
 (`inputData/pbp_nfldb_2009_2013.csv`).
 
-## More
+## Related book
 
-There's also a [sports analytics book](sports_analytics_book/). If you find this useful,
-consider following [microprediction](https://www.linkedin.com/company/65109690) on LinkedIn.
+*Sports Analytics*, by Leonard C. MacLean and William T. Ziemba — World Scientific
+Series in Finance, Vol. 18 (2021):
+[worldscientific.com/worldscibooks/10.1142/12566](https://www.worldscientific.com/worldscibooks/10.1142/12566).
+A collection of analytic techniques across baseball, basketball, hockey, NFL football,
+and horseracing.
+
+If you find this useful, consider following
+[microprediction](https://www.linkedin.com/company/65109690) on LinkedIn.
 
 ---
 
