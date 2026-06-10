@@ -687,10 +687,10 @@
      ===================================================================== */
   function wireLinks() {
     const map = {
-      "link-wilmott": FD.links.wilmott, "link-paper": FD.links.paper,
-      "link-notebook": FD.links.notebook, "link-colab": FD.links.colab,
-      "link-blog": FD.links.blog, "link-linkedin": FD.links.linkedin,
-      "link-data": FD.links.data,
+      "link-book": FD.links.book, "link-wilmott": FD.links.wilmott,
+      "link-paper": FD.links.paper, "link-notebook": FD.links.notebook,
+      "link-colab": FD.links.colab, "link-blog": FD.links.blog,
+      "link-linkedin": FD.links.linkedin, "link-data": FD.links.data,
     };
     Object.entries(map).forEach(([id, href]) => {
       const el = document.getElementById(id);

@@ -13,11 +13,16 @@ central "what would a possession have to be worth?" calculation (≈ 66 yards to
 reaching), a 2nd-and-1 vs 1st-and-10 simulation, the 3rd-and-1 run/pass decision, and
 the distribution of yards gained. Source for the site is in [`docs/`](docs/).
 
-## The paper
+## Publications
 
-Cotton, P. (2022). **“Stop Shy of the First Down.”** *Wilmott*, January 2022, pp. 44–49.
+This work appears as a book chapter and a magazine article:
 
-- 📄 Published article — [`wilmott_paper/`](wilmott_paper/)
+- 📕 **Book chapter** — Cotton, P. “Stop Shy of the First Down,” in *Sports Analytics*,
+  L. C. MacLean & W. T. Ziemba (eds.), World Scientific Series in Finance, Vol. 18
+  (World Scientific, 2021).
+  [worldscientific.com/worldscibooks/10.1142/12566](https://www.worldscientific.com/worldscibooks/10.1142/12566)
+- 📄 **Magazine** — Cotton, P. “Stop Shy of the First Down,” *Wilmott*, Jan 2022,
+  pp. 44–49. [`wilmott_paper/`](wilmott_paper/)
 - 📝 Earlier draft (2021) — [`Stop_Shy_of_the_First_Down_2021_07.pdf`](Stop_Shy_of_the_First_Down_2021_07.pdf)
 - 🎓 MIT Sloan Sports Analytics submission — [`Stop_Shy_MIT_submission.docx`](Stop_Shy_MIT_submission.docx)
 - ✍️ Discussion — [microprediction.com/blog/nine](https://www.microprediction.com/blog/nine)
@@ -37,16 +42,11 @@ NFL play-by-play for the 2009–2013 seasons, compiled by Dilday (2016) and pack
 [microprediction/nflMarkov](https://github.com/microprediction/nflMarkov)
 (`inputData/pbp_nfldb_2009_2013.csv`).
 
-## Related book
+## More
 
-*Sports Analytics*, by Leonard C. MacLean and William T. Ziemba — World Scientific
-Series in Finance, Vol. 18 (2021):
-[worldscientific.com/worldscibooks/10.1142/12566](https://www.worldscientific.com/worldscibooks/10.1142/12566).
-A collection of analytic techniques across baseball, basketball, hockey, NFL football,
-and horseracing.
-
-If you find this useful, consider following
-[microprediction](https://www.linkedin.com/company/65109690) on LinkedIn.
+The chapter sits in *Sports Analytics* (MacLean & Ziemba, eds.) alongside work on
+baseball, basketball, hockey, NFL football, and horseracing. If you find this useful,
+consider following [microprediction](https://www.linkedin.com/company/65109690) on LinkedIn.
 
 ---
 

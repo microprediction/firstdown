@@ -90,7 +90,10 @@ const FD = {
   // External links. The PDF/notebook live in the repo root, which is NOT part of
   // the published /docs site, so these point at GitHub rather than relative paths.
   links: {
-    // Published article: Cotton, P. (2022) "Stop Shy of the First Down", Wilmott, Jan 2022, pp. 44-49.
+    // Book chapter: Cotton, P. "Stop Shy of the First Down", in Sports Analytics
+    // (MacLean & Ziemba, eds.), World Scientific Series in Finance Vol. 18 (2021).
+    book: "https://www.worldscientific.com/worldscibooks/10.1142/12566",
+    // Magazine: Cotton, P. (2022) "Stop Shy of the First Down", Wilmott, Jan 2022, pp. 44-49.
     wilmott: "https://github.com/microprediction/firstdown/raw/main/wilmott_paper/44-49_Cotton_PDF5_Jan22%20(2).pdf",
     paper: "https://github.com/microprediction/firstdown/raw/main/Stop_Shy_of_the_First_Down_2021_07.pdf",
     notebook: "https://github.com/microprediction/firstdown/blob/main/Stop_shy_of_the_first_down.ipynb",
